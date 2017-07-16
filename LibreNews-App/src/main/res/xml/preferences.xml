@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/server_settings_label">
+
+        <EditTextPreference
+            android:id="@+id/server_url"
+            android:defaultValue="@string/default_server_url"
+            android:key="server_url"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/server_url_description"
+            android:title="@string/server_url_label" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="automatically_refresh"
+            android:summary="@string/auto_refresh_description"
+            android:title="@string/auto_refresh_label" />
+        <ListPreference
+            android:defaultValue="5"
+            android:dependency="automatically_refresh"
+            android:entries="@array/refresh_rates"
+            android:entryValues="@array/refresh_values"
+            android:key="refresh_preference"
+            android:summary="@string/refresh_rate_description"
+            android:title="@string/refresh_rate_label" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/notification_preferences_label">
+
+        <SwitchPreference
+            android:id="@+id/notifications_enabled"
+            android:defaultValue="true"
+            android:key="notifications_enabled"
+            android:summary="@string/notifications_enabled_description"
+            android:title="@string/notifications_enabled_label" />
+        <RingtonePreference
+            android:defaultValue=""
+            android:dependency="notifications_enabled"
+            android:key="notification_sound"
+            android:ringtoneType="notification|alarm"
+            android:title="@string/notification_sound_label" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/debug_label">
+
+        <SwitchPreference
+            android:id="@+id/debug"
+            android:defaultValue="false"
+            android:key="debug"
+            android:summary="@string/debug_mode_description"
+            android:title="@string/debug_mode_label" />
+    </PreferenceCategory>
+</PreferenceScreen>
