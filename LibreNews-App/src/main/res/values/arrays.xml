@@ -28,4 +28,12 @@
         <item>720</item>
         <item>1440</item>
     </string-array>
+    <string-array name="channels">
+        <item>Announcements</item>
+        <item>Breaking News</item>
+    </string-array>
+    <string-array name="default_channels">
+        <item>Announcements</item>
+        <item>Breaking News</item>
+    </string-array>
 </resources>

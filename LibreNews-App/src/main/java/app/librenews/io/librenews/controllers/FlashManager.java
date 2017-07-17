@@ -1,17 +1,14 @@
 package app.librenews.io.librenews.controllers;
 
-import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -30,10 +27,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import app.librenews.io.librenews.R;
 import app.librenews.io.librenews.models.Flash;
+import app.librenews.io.librenews.views.MainFlashActivity;
 
 /**
  * Created by miles on 7/14/17.
@@ -47,11 +47,32 @@ public class FlashManager {
     String serverUrl;
     String serverName;
     Context context;
+    public static ConnectionStatus lastContactSuccessful = ConnectionStatus.NEUTRAL;
+
+    public enum ConnectionStatus {
+        VALID,
+        INVALID,
+        NEUTRAL;
+
+        public int color(){
+            if(this.equals(VALID)){
+                return Color.parseColor("#3fee3f");
+            }
+            if(this.equals(INVALID)){
+                return Color.parseColor("#ff3f3f");
+            }
+            if(this.equals(INVALID)){
+                return Color.parseColor("#808080");
+            }
+            return Color.parseColor("#808080");
+        }
+    }
 
     public FlashManager(Context context) {
         this.context = context;
         this.prefs = PreferenceManager.getDefaultSharedPreferences(context);
         this.serverUrl = prefs.getString("server_url", "https://librenews.io/api");
+        lastContactSuccessful = ConnectionStatus.NEUTRAL;
         try {
             loadFlashesFromStorage();
         } catch (FileNotFoundException exception) {
@@ -174,6 +195,10 @@ public class FlashManager {
 
     public void refresh() {
         String newServerUrl = prefs.getString("server_url", "https://librenews.io/api");
+        Set<String> defaults = new HashSet<>();
+        defaults.add("Breaking News");
+        defaults.add("Announcements"); // mwahaha
+        final Set<String> channels = prefs.getStringSet("channels", defaults);
         if (!newServerUrl.equals(serverUrl)) {
             // they changed their server preferences!
             try {
@@ -191,7 +216,11 @@ public class FlashManager {
             retreiver.retrieveFlashes(new FlashRetreiver.FlashHandler() {
                 @Override
                 public void success(Flash[] flashes, String serverName) {
+                    lastContactSuccessful = ConnectionStatus.VALID;
                     for (Flash f : flashes){
+                        if(!channels.contains(f.getChannel())){
+                            continue;
+                        }
                         boolean pushed = false;
                         for (Flash p : getLatestPushedFlashes()) {
                             if (p.getId().equals(f.getId())) {
@@ -210,12 +239,19 @@ public class FlashManager {
                             DebugManager.sendDebugNotification("Error occurred while trying push notifications: " + exception.getLocalizedMessage(), context);
                         }
                     }
+                    if(MainFlashActivity.activeInstance != null){
+                        MainFlashActivity.activeInstance.regenerateToolbarStatus();
+                    }
                 }
 
                 @Override
                 public void failure(Exception exception) {
+                    lastContactSuccessful = ConnectionStatus.INVALID;
                     exception.printStackTrace();
                     DebugManager.sendDebugNotification("An error occurred while trying to receive flashes: " + exception.getLocalizedMessage(), context);
+                    if(MainFlashActivity.activeInstance != null){
+                        MainFlashActivity.activeInstance.regenerateToolbarStatus();
+                    }
                 }
             }, context);
         } catch (MalformedURLException exception) {
@@ -223,6 +259,9 @@ public class FlashManager {
             exception.printStackTrace();
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+        if(MainFlashActivity.activeInstance != null){
+            MainFlashActivity.activeInstance.regenerateToolbarStatus();
         }
     }
 }

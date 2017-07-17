@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/settings_button"
+            android:id="@+id/refresh_button"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,58 +29,57 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/action_settings"
+            android:text="@string/refresh_label"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintRight_toRightOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
         <TextView
-            android:id="@+id/server_name"
+            android:id="@+id/server_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="[server name]"
+            android:text="•"
+            android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintLeft_toLeftOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar"
             app:layout_constraintVertical_bias="0.444" />
 
-        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/swiperefresh"
-            android:layout_width="360dp"
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[ERROR]"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            app:layout_constraintTop_toTopOf="@+id/server_status"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/server_status"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/server_status"
+            android:layout_marginLeft="8dp" />
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="app.librenews.io.librenews.views.SettingsActivityFragment"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="0dp"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintVertical_bias="0.5">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="137dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </android.support.constraint.ConstraintLayout>
-                </LinearLayout>
-            </ScrollView>
-
-        </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="0dp"
+            app:layout_constraintRight_toRightOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

@@ -24,6 +24,13 @@
             android:key="refresh_preference"
             android:summary="@string/refresh_rate_description"
             android:title="@string/refresh_rate_label" />
+        <MultiSelectListPreference
+            android:defaultValue="@array/default_channels"
+            android:entries="@array/channels"
+            android:entryValues="@array/channels"
+            android:key="channels"
+            android:summary="@string/channels_description"
+            android:title="@string/channels_label" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/notification_preferences_label">
 
