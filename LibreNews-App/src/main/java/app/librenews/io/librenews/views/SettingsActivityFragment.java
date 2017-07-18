@@ -13,10 +13,8 @@ public class SettingsActivityFragment extends PreferenceFragment {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
-
         SharedPreferences.OnSharedPreferenceChangeListener spChanged = new
                 SharedPreferences.OnSharedPreferenceChangeListener() {
                     @Override
@@ -30,7 +28,6 @@ public class SettingsActivityFragment extends PreferenceFragment {
                         }
                     }
                 };
-
         PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(spChanged);
     }
 }

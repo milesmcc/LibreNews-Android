@@ -63,7 +63,7 @@ public class SyncManager {
     public static class BootReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent){
-            SyncManager manager = new SyncManager(context, new FlashManager(context));
+            SyncManager manager = new SyncManager(context.getApplicationContext(), new FlashManager(context.getApplicationContext()));
             manager.startSyncService();
         }
     }

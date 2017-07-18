@@ -199,6 +199,7 @@ public class FlashManager {
         defaults.add("Breaking News");
         defaults.add("Announcements"); // mwahaha
         final Set<String> channels = prefs.getStringSet("channels", defaults);
+        final boolean newInstallation = getLatestPushedFlashes().size() == 0;
         if (!newServerUrl.equals(serverUrl)) {
             // they changed their server preferences!
             try {
@@ -229,7 +230,9 @@ public class FlashManager {
                         }
                         try {
                             if (!pushed) {
-                                pushFlashNotification(f);
+                                if(!newInstallation) {
+                                    pushFlashNotification(f);
+                                }
                                 ArrayList<Flash> q = getLatestPushedFlashes();
                                 q.add(f);
                                 writeFlashesToStorage(q); // lots of IO, but it's OK
