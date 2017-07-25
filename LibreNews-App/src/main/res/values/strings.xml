@@ -12,7 +12,7 @@
     <string name="refresh_rate_description">How frequently LibreNews should contact the newsflash server in the background to check for new notifications.</string>
     <string name="notification_sound_label">Notification sound</string>
     <string name="notification_sound_description">The sound that LibreNews will make when a notification is received.</string>
-    <string name="notifications_enabled_description">Whether LibreNews shoud send you notifications.</string>
+    <string name="notifications_enabled_description">Whether LibreNews should send you notifications.</string>
     <string name="internal_storage_setup_fail">Unable to set up internal storage!</string>
     <string name="internal_storage_read_fail">Unable to read from internal storage!</string>
     <string name="invalid_server_url">Invalid server URL!</string>
