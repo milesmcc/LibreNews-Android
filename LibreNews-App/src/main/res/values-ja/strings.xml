@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">LibreNews</string>
+    <string name="server_settings_label">サーバー設定</string>
+    <string name="default_server_url">https://librenews.io/api</string>
+    <string name="server_url_label">サーバー</string>
+    <string name="refresh_rate_label">リフレッシュレート</string>
+    <string name="notification_preferences_label">通知設定</string>
+    <string name="notifications_enabled_label">通知は有効です</string>
+    <string name="auto_refresh_label">自動リフレッシュ</string>
+    <string name="server_url_description">ニュースフラッシュを取得するサーバーの URL。 HTTPS にする必要があります。</string>
+    <string name="auto_refresh_description">LibreNews がバックグラウンドで自動的にリフレッシュするかどうか。</string>
+    <string name="refresh_rate_description">LibreNews が新しい通知を確認するため、バックグラウンドでニュースフラッシュサーバーに接続する頻度。</string>
+    <string name="notification_sound_label">通知サウンド</string>
+    <string name="notification_sound_description">LibreNews が通知を受け取った時のサウンド。</string>
+    <string name="notifications_enabled_description">LibreNews が通知するかどうか。</string>
+    <string name="internal_storage_setup_fail">内部ストレージにセットアップできません!</string>
+    <string name="internal_storage_read_fail">内部ストレージから読み込みできません!</string>
+    <string name="invalid_server_url">無効なサーバー URL!</string>
+    <string name="debug_label">デバッグ</string>
+    <string name="debug_mode_label">デバッグモード</string>
+    <string name="debug_mode_description">LibreNews がたくさんのデバッグメッセージを送るかどうか (通知で)</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="pref_header_notifications">通知</string>
+    <string name="action_settings">設定</string>
+    <string name="channels_label">チャンネル</string>
+    <string name="channels_description">通知とフィードに表示されるチャンネルを選択。</string>
+    <string name="refresh_label">リフレッシュ</string>
+    <string name="https_required">サーバーは HTTPS にする必要があります</string>
+    <string name="notifications_disabled">通知は無効です</string>
+    <string name="sync_disabled">同期は無効です</string>
+
+    <string name="short_description">
+    <![CDATA[
+    <p>最新ニュースの通知は、情報を受け取るために最も重要なチャネルの 1 つです。</p><p><strong>LibreNews はほぼすべての携帯で動作して、 <i>ミニマリスト、フリー、オープンソース、ファースト、セキュア、 </i>そして <i>分散</i> ニュース通知サービス</strong> を提供することで、このプロセスを民主化することを目指しています。</p>
+    ]]>
+    </string>
+
+</resources>
