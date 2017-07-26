@@ -49,7 +49,8 @@ The Fair Information Practices Principles form the backbone of privacy law in th
 
 In order to be in line with Fair Information Practices we will take the following responsive action, should a data breach occur:
 We will notify the users via in-app notification
-      * Within 1 business day
+
+* Within 1 business day
 
 We also agree to the Individual Redress Principle which requires that individuals have the right to legally pursue enforceable rights against data collectors and processors who fail to adhere to the law. This principle requires not only that individuals have enforceable rights against data users, but also that individuals have recourse to courts or government agencies to investigate and/or prosecute non-compliance by data processors.
 
