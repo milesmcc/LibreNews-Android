@@ -3,8 +3,7 @@ This privacy policy has been compiled to better serve those who are concerned wi
 
 #### What personal information do we collect from the people that visit our blog, website or app?
 
-We do not collect information from visitors of our site.
-or other details to help you with your experience. LibreNews is proud to not track its users.
+We do **not** collect information from visitors of our site, or other details to help you with your experience. _LibreNews is proud to not track its users._
 
 #### Do we use 'cookies'?
 
@@ -12,11 +11,11 @@ We do not use cookies.
 
 #### Third-party disclosure
 
-We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.
+We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information. (We wouldn't, and we couldn't: we don't collect your information!)
 
 #### Third-party links
 
-We do not include or offer third-party products or services on our website. While third-party links may appear in the form of LibreNews notifications, this is because they are newsworthy, and not because they are promotions. LibreNews is a noncommercial product.
+We do **not** include or offer third-party products or services on our website. While third-party links may appear in the form of LibreNews notifications, this is because they are newsworthy, and not because they are promotions. LibreNews is an entirely noncommercial product.
 
 #### California Online Privacy Protection Act
 
@@ -31,10 +30,10 @@ Our Privacy Policy link includes the word 'Privacy' and can easily be found on t
 via a LibreNews.io server notification
 
 #### How does our site handle Do Not Track signals?
-We don't honor Do Not Track signals and Do Not Track, plant cookies, or use advertising when a Do Not Track (DNT) browser mechanism is in place. We don't honor them because we don't track you regardless.
+We don't honor Do Not Track signals when a Do Not Track (DNT) browser mechanism is in place. We don't honor them because we don't track you regardless. (There isn't any functionality that could change if we were to treat DNT requests differently.)
 
 #### Does our site allow third-party behavioral tracking?
-It's also important to note that we do not allow third-party behavioral tracking
+We do not allow third-party behavioral tracking.
 
 #### COPPA (Children Online Privacy Protection Act)
 
