@@ -5,6 +5,8 @@ LibreNews is a client for the LibreNews server. It is a free, fast, open-source,
 
 Breaking news notifications are perhaps the most important channel by which we receive our information about the world, and LibreNews aims to democratize this essential medium. Don't let any corporation or government agency control your breaking news.
 
+We are proud not to track our users. View the steps we have taken to [protect their information](https://github.com/milesmcc/LibreNews-Android/blob/master/STOPTRACKING.md), as well as our [privacy policy](https://github.com/milesmcc/LibreNews-Android/blob/master/PRIVACY.md).
+
 ## Download LibreNews
 
 <a href="https://f-droid.org/packages/app.librenews.io.librenews" target="_blank">
