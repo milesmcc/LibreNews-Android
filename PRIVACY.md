@@ -41,7 +41,8 @@ It's also important to note that we do not allow third-party behavioral tracking
 When it comes to the collection of personal information from children under the age of 13 years old, the Children's Online Privacy Protection Act (COPPA) puts parents in control. The Federal Trade Commission, United States' consumer protection agency, enforces the COPPA Rule, which spells out what operators of websites and online services must do to protect children's privacy and safety online.
 
 We do not specifically market to children under the age of 13 years old.
-Do we let third-parties, including ad networks or plug-ins collect PII from children under 13?
+
+We do not let third-parties, including ad networks or plug-ins, collect PII from our users, including those under 13.
 
 #### Fair Information Practices
 
