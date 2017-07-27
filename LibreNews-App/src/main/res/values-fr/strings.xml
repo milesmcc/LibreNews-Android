@@ -34,5 +34,10 @@
     Les notifications d\'actualités sont parmi les canaux les plus importants par lesquels nous recevons des informations. LibreNews vise à démocratiser ce processus en fournissant un service de notification d\'actualités minimaliste, libre, open source, rapide, sécurisé et décentralisé qui fonctionnera sur presque n\'importe quel smartphone.</p>
     ]]>
     </string>
+    <string name="title_activity_welcome">Welcome to LibreNews</string>
+    <string name="short_description_of_app">LibreNews provides ad-free, decentralized, and secure breaking news notifications.</string>
+    <string name="how_to_use">You\'ll mostly interact with LibreNews through its notifications, as the app itself is just settings. \n\nYou\'ll probably get around 3 breaking news notifications per day, if you stick with the default settings.</string>
+    <string name="final_notes_welcome_screen">LibreNews doesn\'t track you in any way, and doesn\'t have ads. It\'s completely open source, making the code free for anyone to see.</string>
+    <string name="start_app">START LIBRENEWS</string>
 
 </resources>

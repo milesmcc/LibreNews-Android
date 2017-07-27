@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <fragment android:name=".views.SettingsActivityFragment" />
         <receiver
             android:name=".controllers.SyncManager$RefreshBroadcastReceiver"
             android:exported="true">

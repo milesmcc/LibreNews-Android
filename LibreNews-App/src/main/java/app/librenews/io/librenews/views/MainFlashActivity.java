@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import app.librenews.io.librenews.R;
 import app.librenews.io.librenews.controllers.FlashManager;
+import app.librenews.io.librenews.controllers.SyncManager;
 
 public class MainFlashActivity extends AppCompatActivity {
     public static MainFlashActivity activeInstance;
@@ -66,7 +67,6 @@ public class MainFlashActivity extends AppCompatActivity {
                 manager.refresh();
             }
         });
-        regenerateToolbarStatus();
     }
 
     @Override

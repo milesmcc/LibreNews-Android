@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
@@ -141,13 +142,18 @@ public class FlashManager {
 
         int min = 0;
         int max = sorted.length - 1;
-        if(max < 0){
-            max = 0;
-        }
+
         if (max > flashesToStoreInDatabase) {
             min = max - flashesToStoreInDatabase;
         }
         JSONArray output = new JSONArray();
+        if(min < 0 || max >= sorted.length){
+            min = 0;
+            max = sorted.length - 1;
+        }
+        if(max < 0){
+            max = 0;
+        }
         for (int i = min; i <= max; i++) {
             output.put(sorted[i].serialize());
         }
@@ -246,9 +252,17 @@ public class FlashManager {
                             DebugManager.sendDebugNotification("Error occurred while trying push notifications: " + exception.getLocalizedMessage(), context);
                         }
                     }
-                    if(MainFlashActivity.activeInstance != null){
-                        MainFlashActivity.activeInstance.regenerateToolbarStatus();
-                    }
+                    Handler mainHandler = new Handler(context.getMainLooper());
+                    Runnable myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            if(MainFlashActivity.activeInstance != null){
+                                MainFlashActivity.activeInstance.regenerateToolbarStatus();
+                            }
+                        }
+                    };
+                    mainHandler.post(myRunnable);
+
                 }
 
                 @Override
@@ -256,9 +270,16 @@ public class FlashManager {
                     lastContactSuccessful = ConnectionStatus.INVALID;
                     exception.printStackTrace();
                     DebugManager.sendDebugNotification("An error occurred while trying to receive flashes: " + exception.getLocalizedMessage(), context);
-                    if(MainFlashActivity.activeInstance != null){
-                        MainFlashActivity.activeInstance.regenerateToolbarStatus();
-                    }
+                    Handler mainHandler = new Handler(context.getMainLooper());
+                    Runnable myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            if(MainFlashActivity.activeInstance != null){
+                                MainFlashActivity.activeInstance.regenerateToolbarStatus();
+                            }
+                        }
+                    };
+                    mainHandler.post(myRunnable);
                 }
             }, context);
         } catch (MalformedURLException exception) {
@@ -267,8 +288,15 @@ public class FlashManager {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        if(MainFlashActivity.activeInstance != null){
-            MainFlashActivity.activeInstance.regenerateToolbarStatus();
-        }
+        Handler mainHandler = new Handler(context.getMainLooper());
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if(MainFlashActivity.activeInstance != null){
+                    MainFlashActivity.activeInstance.regenerateToolbarStatus();
+                }
+            }
+        };
+        mainHandler.post(myRunnable);
     }
 }
