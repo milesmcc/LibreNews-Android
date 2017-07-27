@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
@@ -19,10 +20,14 @@ public class DebugManager {
         if(prefs.getBoolean("debug", false)){
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_debug)
                             .setStyle(new NotificationCompat.BigTextStyle()
                                     .bigText(message))
                             .setContentText(message);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mBuilder.setSmallIcon(R.drawable.ic_debug);
+            } else {
+                mBuilder.setSmallIcon(R.drawable.ic_debug_compat);
+            }
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

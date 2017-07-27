@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
@@ -179,14 +180,17 @@ public class FlashManager {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_alert)
                         .setContentTitle(flash.getChannel() + " • " + flash.getSource())
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(flash.getText()))
                         .setContentText(flash.getText())
                         .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
                         .setContentIntent(pendingIntent);
-
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mBuilder.setSmallIcon(R.drawable.ic_alert);
+        } else {
+            mBuilder.setSmallIcon(R.drawable.ic_alert_compat);
+        }
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

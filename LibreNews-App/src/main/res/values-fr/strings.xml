@@ -31,7 +31,7 @@
     <string name="status_text" formatted="false">Synchronisation tout les {rate}</string>
     <string name="short_description">
     <![CDATA[
-    <p>Les notifications d\'actualités sont parmi les canaux les plus importants par lesquels nous recevons des informations.</p><p><strong>LibreNews vise à démocratiser ce processus en fournissant un service de notification d\'actualités <i>minimaliste, libre, open source, rapide, sécurisé</i> et <i>décentralisé</i></strong> qui fonctionnera sur presque n\'importe quel smartphone.</p>
+    Les notifications d\'actualités sont parmi les canaux les plus importants par lesquels nous recevons des informations. LibreNews vise à démocratiser ce processus en fournissant un service de notification d\'actualités minimaliste, libre, open source, rapide, sécurisé et décentralisé qui fonctionnera sur presque n\'importe quel smartphone.</p>
     ]]>
     </string>
 

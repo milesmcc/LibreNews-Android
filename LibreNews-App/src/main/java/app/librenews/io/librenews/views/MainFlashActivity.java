@@ -1,5 +1,6 @@
 package app.librenews.io.librenews.views;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import app.librenews.io.librenews.controllers.FlashManager;
 
 public class MainFlashActivity extends AppCompatActivity {
     public static MainFlashActivity activeInstance;
+    public static boolean forceDisableWelcomeScreen = false;
 
     FlashManager manager;
 
@@ -54,6 +56,10 @@ public class MainFlashActivity extends AppCompatActivity {
         activeInstance = this;
         setContentView(R.layout.activity_flash_view);
         manager = new FlashManager(this);
+        if(manager.getLatestPushedFlashes().size() == 0 && !forceDisableWelcomeScreen){
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+        }
         findViewById(R.id.refresh_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
