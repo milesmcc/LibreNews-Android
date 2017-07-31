@@ -16,6 +16,12 @@
             android:key="automatically_refresh"
             android:summary="@string/auto_refresh_description"
             android:title="@string/auto_refresh_label" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="wifi_sync_only"
+            android:summary="@string/wifi_sync_only_description"
+            android:title="@string/wifi_sync_only_label"
+            android:dependency="automatically_refresh"/>
         <ListPreference
             android:defaultValue="5"
             android:dependency="automatically_refresh"

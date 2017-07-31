@@ -40,5 +40,7 @@
     <string name="final_notes_welcome_screen">LibreNews doesn\'t track you in any way, and doesn\'t have ads. It\'s completely open source, making the code free for anyone to see.</string>
     <string name="start_app">START LIBRENEWS</string>
     <string name="status_text" formatted="false">syncing every {rate}</string>
+    <string name="wifi_sync_only_label">WiFi sync only</string>
+    <string name="wifi_sync_only_description">Whether LibreNews should sync only over WiFi (and not over cellular data). A LibreNews sync uses about 9 kB of data (less than 1% of a megabyte).</string>
 
 </resources>

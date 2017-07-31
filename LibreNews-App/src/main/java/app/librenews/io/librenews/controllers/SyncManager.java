@@ -8,12 +8,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import app.librenews.io.librenews.R;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
 import static app.librenews.io.librenews.controllers.DebugManager.sendDebugNotification;
 
 /**
@@ -53,6 +56,14 @@ public class SyncManager {
     public static class RefreshBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if(PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()).getBoolean("wifi_sync_only", false)) {
+                ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+                int networkType = connManager.getActiveNetworkInfo().getType();
+                if(networkType != ConnectivityManager.TYPE_WIFI){
+                    sendDebugNotification("Not on WiFi, not syncing...", context);
+                    return;
+                }
+            }
             sendDebugNotification("Syncing with server...", context);
             FlashManager flashManager = new FlashManager(context);
             flashManager.refresh();
