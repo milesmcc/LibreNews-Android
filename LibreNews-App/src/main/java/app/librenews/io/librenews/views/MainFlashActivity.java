@@ -67,6 +67,13 @@ public class MainFlashActivity extends AppCompatActivity {
                 manager.refresh();
             }
         });
+        findViewById(R.id.app_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
