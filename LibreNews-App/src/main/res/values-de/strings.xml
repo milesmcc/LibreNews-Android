@@ -35,7 +35,7 @@
     ]]>
     </string>
 
-    <string name="title_activity_welcome">Willkommen bei LibreNews</string>
+    <string name="title_activity_welcome">Über LibreNews</string>
     <string name="short_description_of_app">LibreNews bietet einen werbefreien, dezentralisierten und sicheren Benachrichtigunsdienst an.</string>
     <string name="how_to_use">Sie werden die meiste Zeit nur über Benachrichtigungen mit LibreNews interagieren, da die App selbst nur für Einstellungen zuständig ist.\n\nWenn Sie den Standardserver verwenden, erhalten Sie circa drei Nachrichten pro Tag.</string>
     <string name="final_notes_welcome_screen">LibreNews verfolgt Sie in keinster Weise und ist werbefrei. Da die App komplett open-source ist, kann jeder den Programm-Code einsehen.</string>
