@@ -42,5 +42,5 @@
     <string name="status_text" formatted="false">syncing every {rate}</string>
     <string name="wifi_sync_only_label">WiFi sync only</string>
     <string name="wifi_sync_only_description">Whether LibreNews should sync only over WiFi (and not over cellular data). A LibreNews sync uses about 9 kB of data (less than 1% of a megabyte).</string>
-
+    <string name="app_info_label">Info</string>
 </resources>
