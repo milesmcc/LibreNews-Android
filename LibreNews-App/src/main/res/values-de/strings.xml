@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">LibreNews</string>
+    <string name="server_settings_label">Servereinstellungen</string>
+    <string name="default_server_url">https://librenews.io/api</string>
+    <string name="server_url_label">Serveradresse</string>
+    <string name="refresh_rate_label">Synchronisationsrate</string>
+    <string name="notification_preferences_label">Benachrichtigungseinstellungen</string>
+    <string name="notifications_enabled_label">Benachrichtigungen aktiviert</string>
+    <string name="auto_refresh_label">Automatisch synchronisieren</string>
+    <string name="server_url_description">Server für Nachrichtenupdates (muss HTTPS sein).</string>
+    <string name="auto_refresh_description">Ob im Hintergrund automatisch synchronisiert werden soll.</string>
+    <string name="refresh_rate_description">Wie oft LibreNews den Server kontaktieren soll, um neue Nachrichten zu erhalten.</string>
+    <string name="notification_sound_label">Benachrichtigungston</string>
+    <string name="notification_sound_description">Dieser Ton wird abgespielt, wenn neue Nachrichten eintreffen.</string>
+    <string name="notifications_enabled_description">Ob LibreNews Ihnen Benachrichtigungen senden soll.</string>
+    <string name="internal_storage_setup_fail">Fehler beim Konfigurieren des internen Speicher!</string>
+    <string name="internal_storage_read_fail">Fehler beim Lesen des internen Speicher!</string>
+    <string name="invalid_server_url">Ungültige Serveradresse!</string>
+    <string name="debug_label">Debug</string>
+    <string name="debug_mode_label">Debug-Modus</string>
+    <string name="debug_mode_description">Ob LibreNews Ihnen Benachrichtigungen zur Fehlererkennung senden soll.</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="pref_header_notifications">Benachrichtigungen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="channels_label">Kanäle</string>
+    <string name="channels_description">Wählen Sie die Kanäle aus, über die Sie informiert werden möchten.</string>
+    <string name="refresh_label">Aktualisieren</string>
+    <string name="https_required">Serveradresse muss HTTPS sein</string>
+    <string name="notifications_disabled">Benachrichtigungen deaktiviert</string>
+    <string name="sync_disabled">Synchronisation deaktiviert</string>
+    <string name="status_text" formatted="false">Synchronisiere alle {rate}</string>
+    <string name="short_description">
+    <![CDATA[
+    Eilmeldungen sind wichtige Kanäle über die wir Informationen erhalten. LibreNews versucht dieses Medium zu demokratisieren, in dem es einen minimalistischen, freien, open source, schnellen, sicheren und dezentralisierten Benachrichtigunsdienst abietet, der fast auf jedem Smartphone läuft.
+    ]]>
+    </string>
+
+    <string name="title_activity_welcome">Willkommen bei LibreNews</string>
+    <string name="short_description_of_app">LibreNews bietet einen werbefreien, dezentralisierten und sicheren Benachrichtigunsdienst an.</string>
+    <string name="how_to_use">Sie werden die meiste Zeit nur über Benachrichtigungen mit LibreNews interagieren, da die App selbst nur für Einstellungen zuständig ist.\n\nWenn Sie den Standardserver verwenden, erhalten Sie circa drei Nachrichten pro Tag.</string>
+    <string name="final_notes_welcome_screen">LibreNews verfolgt Sie in keinster Weise und ist werbefrei. Da die App komplett open-source ist, kann jeder den Programm-Code einsehen.</string>
+    <string name="start_app">LIBRENEWS STARTEN</string>
+    <string name="wifi_sync_only_label">Nur über WLAN synchronisieren</string>
+    <string name="wifi_sync_only_description">Ob LibreNews nur über WLAN synchronisieren soll und nicht über mobile Daten. Eine Synchronisation benötigt circa 9 kB Daten (weniger als 1% eines Megabyte).</string>
+</resources>
