@@ -221,9 +221,16 @@ public class FlashManager {
                 Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.internal_storage_setup_fail), Toast.LENGTH_LONG);
                 exception.printStackTrace();
             }
+            serverUrl = newServerUrl;
+        }
+        long latest = -1;
+        for(Flash f : getLatestPushedFlashes()){
+            if(Long.valueOf(f.getId()) > latest){
+                latest = Long.valueOf(f.getId());
+            }
         }
         try {
-            FlashRetreiver retreiver = new FlashRetreiver(new URL(serverUrl));
+            FlashRetreiver retreiver = new FlashRetreiver(new URL(serverUrl + "?latest=" + latest));
             retreiver.retrieveFlashes(new FlashRetreiver.FlashHandler() {
                 @Override
                 public void success(Flash[] flashes, String serverName) {
