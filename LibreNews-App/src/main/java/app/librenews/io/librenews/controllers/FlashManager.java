@@ -11,8 +11,10 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.text.Html;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -184,12 +186,13 @@ public class FlashManager {
         }
         Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(flash.getLink()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        String text = StringEscapeUtils.unescapeHtml4(flash.getText());
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setContentTitle(flash.getChannel() + " • " + flash.getSource())
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(flash.getText()))
-                        .setContentText(flash.getText())
+                                .bigText(text))
+                        .setContentText(text)
                         .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
                         .setContentIntent(pendingIntent);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
