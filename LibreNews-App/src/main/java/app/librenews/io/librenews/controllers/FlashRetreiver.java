@@ -35,7 +35,6 @@ public class FlashRetreiver {
         this.serverLocation = serverLocation;
     }
 
-
     private Flash[] convertJsonToFlashes(JSONArray jsonFlashes) throws JSONException, ParseException {
         ArrayList<Flash> flashes = new ArrayList<Flash>();
         for (int i = 0; i < jsonFlashes.length(); i++) {
