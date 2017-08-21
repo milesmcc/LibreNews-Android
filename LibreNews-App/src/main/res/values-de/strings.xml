@@ -34,7 +34,7 @@
     Eilmeldungen sind wichtige Kanäle über die wir Informationen erhalten. LibreNews versucht dieses Medium zu demokratisieren, in dem es einen minimalistischen, freien, open source, schnellen, sicheren und dezentralisierten Benachrichtigunsdienst abietet, der fast auf jedem Smartphone läuft.
     ]]>
     </string>
-
+    <string name="app_info_label">Info</string>
     <string name="title_activity_welcome">Über LibreNews</string>
     <string name="short_description_of_app">LibreNews bietet einen werbefreien, dezentralisierten und sicheren Benachrichtigunsdienst an.</string>
     <string name="how_to_use">Sie werden die meiste Zeit nur über Benachrichtigungen mit LibreNews interagieren, da die App selbst nur für Einstellungen zuständig ist.\n\nWenn Sie den Standardserver verwenden, erhalten Sie circa drei Nachrichten pro Tag.</string>
