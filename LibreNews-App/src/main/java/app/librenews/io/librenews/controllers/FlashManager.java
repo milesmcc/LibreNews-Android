@@ -20,11 +20,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -96,12 +98,11 @@ public class FlashManager {
         syncManager.startSyncService();
     }
 
-    public ArrayList<Flash> loadFlashesFromStorage() throws JSONException, IOException, ParseException {
-        FileInputStream inputStream = context.openFileInput(flashFileLocation);
+    private String readFlashFile() throws IOException {
+        File file = new File(context.getFilesDir(), flashFileLocation);
+        FileInputStream inputStream = new FileInputStream(file);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder builder = new StringBuilder();
-        ArrayList<Flash> latestPushedFlashes = new ArrayList<>();
-
         String line;
         while ((line = reader.readLine()) != null) {
             builder.append(line);
@@ -109,14 +110,17 @@ public class FlashManager {
         }
         reader.close();
         inputStream.close();
+        return builder.toString();
+    }
 
-        // System.out.println(builder);
-
-        if(builder.toString().trim().equals("")){
+    public ArrayList<Flash> loadFlashesFromStorage() throws JSONException, IOException, ParseException {
+        String flashFile = readFlashFile();
+        ArrayList<Flash> latestPushedFlashes = new ArrayList<>();
+        if(flashFile.trim().equals("")){
             throw new FileNotFoundException("No flash storage file exists or is empty.");
         }
 
-        JSONArray jsonArray = new JSONArray(builder.toString());
+        JSONArray jsonArray = new JSONArray(flashFile);
         for (int i = 0; i < jsonArray.length(); i++) {
             latestPushedFlashes.add(Flash.deserialize((JSONObject) jsonArray.get(i)));
         }
@@ -212,7 +216,8 @@ public class FlashManager {
         defaults.add("Breaking News");
         defaults.add("Announcements"); // mwahaha
         final Set<String> channels = prefs.getStringSet("channels", defaults);
-        final boolean newInstallation = getLatestPushedFlashes().size() == 0;
+        ArrayList<Flash> latestPushed = getLatestPushedFlashes();
+        final boolean newInstallation = latestPushed.size() == 0;
         if (!newServerUrl.equals(serverUrl)) {
             // they changed their server preferences!
             try {
