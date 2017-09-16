@@ -1,5 +1,6 @@
 package app.librenews.io.librenews.controllers;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -30,9 +31,18 @@ public class DebugManager {
             }
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
+            // for Android 8 compatibility
+            System.out.println(Build.VERSION.SDK_INT);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                String CHANNEL_ID = "librenews_debug";
+                int importance = NotificationManager.IMPORTANCE_LOW;
+                NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "LibreNews Debug", importance);
+                mNotificationManager.createNotificationChannel(mChannel);
+                mBuilder.setChannel(CHANNEL_ID);
+                System.out.println("OREO");
+            }
             mNotificationManager.notify(message.hashCode(), mBuilder.build());
-            System.out.println("LibreNews Debug: " + message);
+            System.out.println("LibreNewz Debug: " + message);
         }
     }
 }

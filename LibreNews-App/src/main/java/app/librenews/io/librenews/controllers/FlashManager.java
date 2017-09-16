@@ -1,5 +1,6 @@
 package app.librenews.io.librenews.controllers;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -197,6 +198,7 @@ public class FlashManager {
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(text))
                         .setContentText(text)
+                        .setAutoCancel(true)
                         .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
                         .setContentIntent(pendingIntent);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -206,6 +208,13 @@ public class FlashManager {
         }
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            String CHANNEL_ID = "librenews_alert";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "LibreNews", importance);
+            mBuilder.setChannel(CHANNEL_ID);
+            mNotificationManager.createNotificationChannel(mChannel);
+        }
 
         mNotificationManager.notify(flash.getIdAsInteger(), mBuilder.build());
     }
