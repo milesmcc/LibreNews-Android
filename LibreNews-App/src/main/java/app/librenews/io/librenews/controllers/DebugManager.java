@@ -1,5 +1,6 @@
 package app.librenews.io.librenews.controllers;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -16,33 +17,55 @@ import app.librenews.io.librenews.R;
  */
 
 public class DebugManager {
-    public static void sendDebugNotification(String message, Context context){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if(prefs.getBoolean("debug", false)){
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText(message))
-                            .setContentText(message);
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mBuilder.setSmallIcon(R.drawable.ic_debug);
-            } else {
-                mBuilder.setSmallIcon(R.drawable.ic_debug_compat);
-            }
-            NotificationManager mNotificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            // for Android 8 compatibility
-            System.out.println(Build.VERSION.SDK_INT);
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    private static NotificationChannel mChannel = null;
+
+    public static NotificationChannel getNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (mChannel == null) {
+                NotificationManager mNotificationManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 String CHANNEL_ID = "librenews_debug";
                 int importance = NotificationManager.IMPORTANCE_LOW;
-                NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, "LibreNews Debug", importance);
+                mChannel = new NotificationChannel(CHANNEL_ID, "LibreNews Debug", importance);
                 mNotificationManager.createNotificationChannel(mChannel);
-                mBuilder.setChannel(CHANNEL_ID);
-                System.out.println("OREO");
             }
-            mNotificationManager.notify(message.hashCode(), mBuilder.build());
-            System.out.println("LibreNewz Debug: " + message);
+            return mChannel;
+        } else {
+            return null;
+        }
+    }
+
+    public static void sendDebugNotification(String message, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if (prefs.getBoolean("debug", false)) {
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Notification.Builder mBuilder =
+                        new Notification.Builder(context, getNotificationChannel(context).getId())
+                                .setStyle(new Notification.BigTextStyle()
+                                        .bigText(message))
+                                .setContentText(message);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mBuilder.setSmallIcon(R.drawable.ic_debug);
+                } else {
+                    mBuilder.setSmallIcon(R.drawable.ic_debug_compat);
+                }
+                mNotificationManager.notify(message.hashCode(), mBuilder.build());
+            } else {
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(context)
+                                .setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText(message))
+                                .setContentText(message);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mBuilder.setSmallIcon(R.drawable.ic_debug);
+                } else {
+                    mBuilder.setSmallIcon(R.drawable.ic_debug_compat);
+                }
+                mNotificationManager.notify(message.hashCode(), mBuilder.build());
+            }
+            System.out.println("LibreNews Debug: " + message);
         }
     }
 }
