@@ -1,5 +1,7 @@
 package app.librenews.io.librenews.controllers;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,7 +13,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.text.Html;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -26,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -41,6 +41,8 @@ import app.librenews.io.librenews.R;
 import app.librenews.io.librenews.models.Flash;
 import app.librenews.io.librenews.views.MainFlashActivity;
 
+import static android.graphics.Color.argb;
+
 /**
  * Created by miles on 7/14/17.
  */
@@ -54,6 +56,24 @@ public class FlashManager {
     String serverName;
     Context context;
     public static ConnectionStatus lastContactSuccessful = ConnectionStatus.NEUTRAL;
+
+    private static NotificationChannel mChannel = null;
+    public static NotificationChannel getNotificationChannel(Context context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (mChannel == null) {
+                NotificationManager mNotificationManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                String CHANNEL_ID = "librenews_alert";
+                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                mChannel = new NotificationChannel(CHANNEL_ID, "LibreNews", importance);
+                mChannel.setLightColor(argb(0, 121, 145, 1));
+                mNotificationManager.createNotificationChannel(mChannel);
+            }
+            return mChannel;
+        }else{
+            return null;
+        }
+    }
 
     public enum ConnectionStatus {
         VALID,
@@ -191,23 +211,35 @@ public class FlashManager {
         Intent notificationIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(flash.getLink()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         String text = StringEscapeUtils.unescapeHtml4(flash.getText());
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setContentTitle(flash.getChannel() + " • " + flash.getSource())
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(text))
-                        .setContentText(text)
-                        .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
-                        .setContentIntent(pendingIntent);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mBuilder.setSmallIcon(R.drawable.ic_alert);
-        } else {
-            mBuilder.setSmallIcon(R.drawable.ic_alert_compat);
-        }
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotificationManager.notify(flash.getIdAsInteger(), mBuilder.build());
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Notification.Builder oBuilder = new Notification.Builder(context, getNotificationChannel(context).getId());
+            oBuilder.setContentTitle(flash.getChannel() + " • " + flash.getSource())
+                    .setStyle(new Notification.BigTextStyle()
+                            .bigText(text))
+                    .setContentText(text)
+                    .setAutoCancel(true)
+                    .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
+                    .setContentIntent(pendingIntent)
+                    .setSmallIcon(R.drawable.ic_alert);
+            mNotificationManager.notify(flash.getIdAsInteger(), oBuilder.build());
+        }else{
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                    .setContentTitle(flash.getChannel() + " • " + flash.getSource())
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text))
+                    .setContentText(text)
+                    .setAutoCancel(true)
+                    .setSound(Uri.parse(prefs.getString("notification_sound", "DEFAULT")))
+                    .setContentIntent(pendingIntent);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mBuilder.setSmallIcon(R.drawable.ic_alert);
+            } else {
+                mBuilder.setSmallIcon(R.drawable.ic_alert_compat);
+            }
+            mNotificationManager.notify(flash.getIdAsInteger(), mBuilder.build());
+        }
     }
 
     public void refresh() {
