@@ -31,7 +31,7 @@
     <string name="status_text" formatted="false">Synchronisiere alle {rate}</string>
     <string name="short_description">
     <![CDATA[
-    Eilmeldungen sind wichtige Kanäle über die wir Informationen erhalten. LibreNews versucht dieses Medium zu demokratisieren, in dem es einen minimalistischen, freien, open source, schnellen, sicheren und dezentralisierten Benachrichtigunsdienst abietet, der fast auf jedem Smartphone läuft.
+    Eilmeldungen sind wichtige Kanäle über die wir Informationen erhalten. LibreNews versucht dieses Medium zu demokratisieren, in dem es einen minimalistischen, freien, open source, schnellen, sicheren und dezentralisierten Benachrichtigunsdienst anbietet, der fast auf jedem Smartphone läuft.
     ]]>
     </string>
     <string name="app_info_label">Info</string>
