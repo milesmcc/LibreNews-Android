@@ -1,8 +1,10 @@
 package app.librenews.io.librenews.controllers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Debug;
+import android.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -70,6 +74,17 @@ public class FlashRetreiver {
             String data = sb.toString();
             JSONObject jsonData = new JSONObject(data);
             serverName = jsonData.getString("server");
+
+            JSONArray channels = jsonData.getJSONArray("channels");
+            HashSet<String> available_channels = new HashSet<String>();
+            for (int i = 0; i < channels.length(); i++) {
+                available_channels.add(channels.getString(i));
+            }
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putStringSet("available_channels", available_channels);
+            editor.apply();
+
             flashes = convertJsonToFlashes(jsonData.getJSONArray("latest"));
         }
         sendDebugNotification("Flashes found: " + flashes.length, context);
