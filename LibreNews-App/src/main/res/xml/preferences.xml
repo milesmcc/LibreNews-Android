@@ -31,6 +31,7 @@
             android:summary="@string/refresh_rate_description"
             android:title="@string/refresh_rate_label" />
         <MultiSelectListPreference
+            android:id="@+id/channels"
             android:defaultValue="@array/default_channels"
             android:entries="@array/channels"
             android:entryValues="@array/channels"
