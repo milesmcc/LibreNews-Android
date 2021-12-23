@@ -304,6 +304,7 @@ public class FlashManager {
                         @Override
                         public void run() {
                             if(MainFlashActivity.activeInstance != null){
+                                onDone();
                                 MainFlashActivity.activeInstance.regenerateToolbarStatus();
                             }
                         }
@@ -345,5 +346,20 @@ public class FlashManager {
             }
         };
         mainHandler.post(myRunnable);
+    }
+
+    public interface DoneCallback{
+        void onDone();
+    }
+
+    ArrayList<DoneCallback> callbacks = new ArrayList<DoneCallback>();
+    public void addDoneCallback(DoneCallback d) {
+        this.callbacks.add(d);
+    }
+
+    public void onDone(){
+        for (DoneCallback d : callbacks) {
+            d.onDone();
+        }
     }
 }
